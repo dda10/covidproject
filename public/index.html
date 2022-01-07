@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <div>
+      <head>
+        <style>
+          body {
+            margin: 0;
+            padding: 0;
+          }
+          *,
+          ::after,
+          ::before {
+            box-sizing: border-box;
+          }
+          @font-face {
+            font-family: "Merriweather";
+            font-weight: 400;
+            font-style: normal;
+            src: url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Regular.woff2")
+                format("woff2"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Regular.woff")
+                format("woff"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Regular.ttf")
+                format("truetype"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Regular.eot")
+                format("embedded-opentype");
+          }
+          @font-face {
+            font-family: "Merriweather";
+            font-weight: 500;
+            font-style: normal;
+            src: url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Medium.woff2")
+                format("woff2"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Medium.woff")
+                format("woff"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Medium.ttf")
+                format("truetype"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Medium.eot")
+                format("embedded-opentype");
+          }
+          @font-face {
+            font-family: "Merriweather";
+            font-weight: 600;
+            font-style: normal;
+            src: url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-SemiBold.woff2")
+                format("woff2"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-SemiBold.woff")
+                format("woff"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-SemiBold.ttf")
+                format("truetype"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-SemiBold.eot")
+                format("embedded-opentype");
+          }
+          @font-face {
+            font-family: "Merriweather";
+            font-weight: 700;
+            font-style: normal;
+            src: url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Bold.woff2")
+                format("woff2"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Bold.woff")
+                format("woff"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Bold.ttf")
+                format("truetype"),
+              url("https://static.pipezero.com/covid-sumary/fonts/MerriweatherSans-Bold.eot")
+                format("embedded-opentype");
+          }
+          a {
+            text-decoration: none;
+            color: #333333;
+          }
+          ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+          }
+          p {
+            margin: 0;
+          }
+          .home__juncture-flex {
+            display: flex;
+            justify-content: space-between;
+          }
+          .home__statistical-nav ul {
+            display: flex;
+            justify-content: space-between;
+          }
+          .home__statistical-nav ul li span {
+            font-size: 22px;
+            line-height: 130%;
+            color: #2e3192;
+            font-weight: 700;
+            font-family: "Merriweather";
+            padding-left: 16px;
+          }
+          .home__statistical-nav ul li span:before {
+            content: "";
+            width: 3px;
+            height: 24px;
+            background: #2e3192;
+            left: 0;
+            top: 2px;
+            position: absolute;
+          }
+          .home__statistical-nav ul li span:after {
+            content: "";
+            width: 3px;
+            height: 24px;
+            background: #ed1c24;
+            left: 3px;
+            top: 2px;
+            position: absolute;
+          }
+          @media (max-width: 991px) {
+            .home__juncture-flex {
+              flex-wrap: wrap;
+            }
+          }
+          .home__juncture-flex .box-juncture {
+            width: calc(50% - 20px);
+          }
+          @media (max-width: 991px) {
+            .home__juncture-flex .box-juncture {
+              width: 100%;
+              margin-bottom: 20px;
+            }
+            .home__juncture-flex .box-juncture:last-child {
+              margin-bottom: 0;
+            }
+          }
+          .home__juncture-flex .table-left {
+            border: 1px solid #eaeaf4;
+            box-sizing: border-box;
+            border-radius: 3px;
+            height: 100%;
+            padding: 0 10px;
+            position: relative;
+          }
+          @media (max-width: 991px) {
+            .home__juncture-flex .table-left {
+              margin-bottom: 20px;
+            }
+          }
+          @media (max-width: 575px) {
+            .home__juncture-flex .table-left {
+              padding: 0px;
+            }
+          }
+          .home__juncture-flex .table-left .row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333333;
+            font-family: "Merriweather";
+            padding: 15px 10px;
+          }
+          .home__juncture-flex .table-left .row:last-child {
+            border-bottom: 0;
+          }
+          .home__juncture-flex .table-left .row.head {
+            font-weight: 500;
+            margin: 0 10px;
+            width: calc(100% - 20px);
+          }
+          .home__juncture-flex .table-left .row .die {
+            width: 69px;
+            text-align: right;
+            margin-left: 10px;
+          }
+          .home__juncture-flex .table-left .row .daynow {
+            width: 74px;
+            text-align: right;
+            margin-left: 10px;
+          }
+          .home__juncture-flex .table-left .row .daynow.red {
+            color: #da2e59;
+          }
+          .home__juncture-flex .table-left .row .total {
+            width: 80px;
+            text-align: right;
+            margin-left: 10px;
+          }
+          .home__juncture-flex .table-left .row .city {
+            flex: 1;
+          }
+          .home__juncture-flex .table-left .tbody {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 0 10px;
+            scrollbar-color: #f0eff4 white;
+            scrollbar-width: thin;
+          }
+          .home__juncture-flex .table-left .tbody::-webkit-scrollbar {
+            width: 5px;
+          }
+          .home__juncture-flex .table-left .tbody::-webkit-scrollbar-track {
+            background: #fff;
+          }
+          .home__juncture-flex .table-left .tbody::-webkit-scrollbar-thumb {
+            background: #f0eff4;
+          }
+          .home__juncture-flex .chart-right {
+            border: 1px solid #eaeaf4;
+            box-sizing: border-box;
+            border-radius: 3px;
+            padding: 10px;
+            height: 100%;
+          }
+          @media (max-width: 991px) {
+            .home__juncture-flex .chart-right {
+              width: 100%;
+            }
+          }
+          .home__juncture-flex .chart-right .chart-top {
+            display: flex;
+            justify-content: space-between;
+          }
+          @media (max-width: 1000px) {
+            .home__juncture-flex .chart-right .chart-top {
+              flex-wrap: wrap;
+            }
+          }
+          .home__juncture-flex .chart-right .chart-top .item {
+            display: block;
+            padding: 10px 8px;
+            background: rgba(46, 49, 146, 0.1);
+            border-radius: 3px;
+            margin-left: 5px;
+            font-family: Arial;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 100%;
+            display: flex;
+            align-items: center;
+            color: #757575;
+          }
+          .home__juncture-flex .chart-right .chart-top .item:first-child {
+            margin-left: 0;
+          }
+          .home__juncture-flex .chart-right .chart-top .item.active {
+            background: #2e3192;
+            color: #fff;
+          }
+          .home__juncture-flex .chart-right .chart-top .nav-type {
+            display: flex;
+          }
+          @media (max-width: 1000px) {
+            .home__juncture-flex .chart-right .chart-top .nav-type {
+              width: 100%;
+              justify-content: center;
+              margin-bottom: 10px;
+            }
+          }
+          .home__juncture-flex .chart-right .chart-top .nav-name {
+            display: flex;
+          }
+          @media (max-width: 1000px) {
+            .home__juncture-flex .chart-right .chart-top .nav-name {
+              width: 100%;
+              justify-content: center;
+              margin-bottom: 10px;
+            }
+            .home__juncture-flex
+              .chart-right
+              .chart-top
+              .nav-name
+              .item:first-child {
+              margin-left: 0;
+            }
+          }
+          .highcharts-figure,
+          .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+          }
+          #container {
+            height: 400px;
+          }
+          .btn-load .xem-them {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='14' height='17' viewBox='0 0 14 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0.299804 9.60859L1.6998 8.20859L5.9998 12.5086L5.9998 0.308594L7.9998 0.308594L7.9998 12.5086L12.2998 8.20859L13.6998 9.60859L6.9998 16.3086L0.299804 9.60859Z' fill='%23757575'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: 9px 7px;
+          }
+          .btn-load .rut-gon {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='14' height='17' viewBox='0 0 14 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0.300048 7.2238L1.70005 8.6238L6.00005 4.3238L6.00005 16.5238L8.00005 16.5238L8.00005 4.3238L12.3 8.6238L13.7 7.2238L7.00005 0.523803L0.300048 7.2238Z' fill='%23757575'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: 9px 7px;
+          }
+          .btn-load {
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+          }
+          .btn-load a {
+            background: #e5e5e5;
+            border-radius: 100px;
+            font-size: 14px;
+            color: #757575;
+            height: 32px;
+            position: relative;
+            line-height: 32px;
+            padding: 0 15px 0 30px;
+            display: inline-block;
+            font-family: "Merriweather";
+          }
+          a.hidden {
+            display: none;
+          }
+          @media (max-width: 575px) {
+            .home__juncture-flex .table-left .row {
+              padding: 15px 0px;
+            }
+            .btn-load {
+              display: block;
+            }
+            .home__juncture-flex .table-left .tbody {
+              max-height: none;
+              overflow-y: none;
+              padding: 0 10px;
+              scrollbar-color: #f0eff4 white;
+              scrollbar-width: thin;
+            }
+            div.tbody div:nth-child(7) ~ div {
+              display: none !important;
+            }
+            div.all div:nth-child(7) ~ div {
+              display: flex !important;
+            }
+            .all {
+              max-height: none !important;
+              overflow-y: none;
+            }
+          }
+        </style>
+        <script>
+          function l(t, e, a) {
+            var i = document.createElement("script");
+            (i.type = "text/javascript"),
+              (i.async = !0),
+              (i.src = t),
+              2 <= arguments.length &&
+                ((i.onload = e),
+                (i.onreadystatechange = function () {
+                  (4 != i.readyState && "complete" != i.readyState) || e();
+                })),
+              (i.onerror = function () {
+                if (void 0 !== a)
+                  try {
+                    a();
+                  } catch (t) {}
+              }),
+              document.getElementsByTagName("head")[0].appendChild(i);
+          }
+        </script>
+        <script
+          type="text/javascript"
+          async=""
+          src="https://static.pipezero.com/covid-sumary/highcharts.js"
+        ></script>
+      </head>
+
+      <body data-new-gr-c-s-check-loaded="14.1043.0" data-gr-ext-installed="">
+        <div class="home__statistical-nav">
+          <ul>
+            <li>
+              <span>Tình hình dịch cả nước</span>
+            </li>
+          </ul>
+        </div>
+        <div class="home__juncture-flex">
+          <div class="box-juncture" id="location">
+            <div class="table-left">
+              <div class="row head">
+                <span class="city">Tỉnh/TP</span
+                ><span class="total">Tổng số ca</span
+                ><span class="daynow">Hôm nay</span
+                ><span class="die">Tử vong</span>
+              </div>
+              <div class="tbody">
+                <div class="row">
+                  <span class="city">TP. Hồ Chí Minh</span
+                  ><span class="total">508.255</span
+                  ><span class="daynow red">+489</span
+                  ><span class="die">19.693</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bình Dương</span
+                  ><span class="total">291.381</span
+                  ><span class="daynow red">+52</span
+                  ><span class="die">3.326</span>
+                </div>
+                <div class="row">
+                  <span class="city">Đồng Nai</span
+                  ><span class="total">98.583</span
+                  ><span class="daynow red">+127</span
+                  ><span class="die">1.514</span>
+                </div>
+                <div class="row">
+                  <span class="city">Tây Ninh</span
+                  ><span class="total">81.886</span
+                  ><span class="daynow red">+583</span
+                  ><span class="die">742</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hà Nội</span
+                  ><span class="total">62.536</span
+                  ><span class="daynow red">+2.723</span
+                  ><span class="die">170</span>
+                </div>
+                <div class="row">
+                  <span class="city">Vĩnh Long</span
+                  ><span class="total">47.158</span
+                  ><span class="daynow red">+699</span
+                  ><span class="die">455</span>
+                </div>
+                <div class="row">
+                  <span class="city">Đồng Tháp</span
+                  ><span class="total">45.445</span
+                  ><span class="daynow red">+135</span
+                  ><span class="die">663</span>
+                </div>
+                <div class="row">
+                  <span class="city">Cần Thơ</span
+                  ><span class="total">42.365</span
+                  ><span class="daynow red">+213</span
+                  ><span class="die">683</span>
+                </div>
+                <div class="row">
+                  <span class="city">Cà Mau</span
+                  ><span class="total">42.110</span
+                  ><span class="daynow red">+676</span
+                  ><span class="die">209</span>
+                </div>
+                <div class="row">
+                  <span class="city">Long An</span
+                  ><span class="total">40.737</span
+                  ><span class="daynow red">+32</span
+                  ><span class="die">946</span>
+                </div>
+                <div class="row">
+                  <span class="city">Khánh Hòa</span
+                  ><span class="total">38.730</span
+                  ><span class="daynow red">+790</span
+                  ><span class="die">197</span>
+                </div>
+                <div class="row">
+                  <span class="city">Tiền Giang</span
+                  ><span class="total">34.504</span
+                  ><span class="daynow red">+97</span
+                  ><span class="die">1.031</span>
+                </div>
+                <div class="row">
+                  <span class="city">An Giang</span
+                  ><span class="total">34.081</span
+                  ><span class="daynow red">+188</span
+                  ><span class="die">1.095</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bạc Liêu</span
+                  ><span class="total">32.126</span
+                  ><span class="daynow red">+210</span
+                  ><span class="die">293</span>
+                </div>
+                <div class="row">
+                  <span class="city">Trà Vinh</span
+                  ><span class="total">31.637</span
+                  ><span class="daynow red">+498</span
+                  ><span class="die">155</span>
+                </div>
+                <div class="row">
+                  <span class="city">Kiên Giang</span
+                  ><span class="total">31.118</span
+                  ><span class="daynow red">+229</span
+                  ><span class="die">596</span>
+                </div>
+                <div class="row">
+                  <span class="city">Sóc Trăng</span
+                  ><span class="total">30.972</span
+                  ><span class="daynow red">+91</span
+                  ><span class="die">394</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bến Tre</span
+                  ><span class="total">28.232</span
+                  ><span class="daynow red">+443</span
+                  ><span class="die">235</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bà Rịa – Vũng Tàu</span
+                  ><span class="total">27.330</span
+                  ><span class="daynow red">+263</span
+                  ><span class="die">240</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bình Phước</span
+                  ><span class="total">26.989</span
+                  ><span class="daynow red">+716</span
+                  ><span class="die">87</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bình Thuận</span
+                  ><span class="total">26.961</span
+                  ><span class="daynow red">+121</span
+                  ><span class="die">318</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bình Định</span
+                  ><span class="total">20.232</span
+                  ><span class="daynow red">+667</span
+                  ><span class="die">67</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hải Phòng</span
+                  ><span class="total">15.612</span
+                  ><span class="daynow red">+795</span
+                  ><span class="die">10</span>
+                </div>
+                <div class="row">
+                  <span class="city">Thừa Thiên Huế</span
+                  ><span class="total">15.395</span
+                  ><span class="daynow red">+235</span
+                  ><span class="die">79</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bắc Ninh</span
+                  ><span class="total">14.135</span
+                  ><span class="daynow red">+351</span
+                  ><span class="die">18</span>
+                </div>
+                <div class="row">
+                  <span class="city">Đà Nẵng</span
+                  ><span class="total">13.353</span
+                  ><span class="daynow red">+309</span
+                  ><span class="die">112</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hậu Giang</span
+                  ><span class="total">12.969</span
+                  ><span class="daynow red">+148</span
+                  ><span class="die">82</span>
+                </div>
+                <div class="row">
+                  <span class="city">Đắk Lắk</span
+                  ><span class="total">12.297</span
+                  ><span class="daynow red">-</span><span class="die">68</span>
+                </div>
+                <div class="row">
+                  <span class="city">Lâm Đồng</span
+                  ><span class="total">10.883</span
+                  ><span class="daynow red">+245</span
+                  ><span class="die">30</span>
+                </div>
+                <div class="row">
+                  <span class="city">Thanh Hóa</span
+                  ><span class="total">9.622</span
+                  ><span class="daynow red">+275</span
+                  ><span class="die">13</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bắc Giang</span
+                  ><span class="total">8.906</span
+                  ><span class="daynow red">+162</span
+                  ><span class="die">14</span>
+                </div>
+                <div class="row">
+                  <span class="city">Nghệ An</span
+                  ><span class="total">8.757</span
+                  ><span class="daynow red">+131</span
+                  ><span class="die">36</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hà Giang</span
+                  ><span class="total">8.753</span
+                  ><span class="daynow red">+263</span
+                  ><span class="die">7</span>
+                </div>
+                <div class="row">
+                  <span class="city">Phú Yên</span
+                  ><span class="total">8.053</span
+                  ><span class="daynow red">+56</span
+                  ><span class="die">55</span>
+                </div>
+                <div class="row">
+                  <span class="city">Gia Lai</span
+                  ><span class="total">8.036</span
+                  ><span class="daynow red">+2</span><span class="die">21</span>
+                </div>
+                <div class="row">
+                  <span class="city">Quảng Nam</span
+                  ><span class="total">7.556</span
+                  ><span class="daynow red">+173</span
+                  ><span class="die">21</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hưng Yên</span
+                  ><span class="total">7.300</span
+                  ><span class="daynow red">+319</span
+                  ><span class="die">2</span>
+                </div>
+                <div class="row">
+                  <span class="city">Quảng Ngãi</span
+                  ><span class="total">6.968</span
+                  ><span class="daynow red">+186</span
+                  ><span class="die">29</span>
+                </div>
+                <div class="row">
+                  <span class="city">Ninh Thuận</span
+                  ><span class="total">6.029</span
+                  ><span class="daynow red">+39</span
+                  ><span class="die">54</span>
+                </div>
+                <div class="row">
+                  <span class="city">Đắk Nông</span
+                  ><span class="total">5.751</span
+                  ><span class="daynow red">+106</span
+                  ><span class="die">14</span>
+                </div>
+                <div class="row">
+                  <span class="city">Quảng Ninh</span
+                  ><span class="total">5.294</span
+                  ><span class="daynow red">+345</span
+                  ><span class="die">1</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hải Dương</span
+                  ><span class="total">5.122</span
+                  ><span class="daynow red">+443</span
+                  ><span class="die">2</span>
+                </div>
+                <div class="row">
+                  <span class="city">Nam Định</span
+                  ><span class="total">4.188</span
+                  ><span class="daynow red">+172</span
+                  ><span class="die">4</span>
+                </div>
+                <div class="row">
+                  <span class="city">Quảng Bình</span
+                  ><span class="total">3.995</span
+                  ><span class="daynow red">+54</span><span class="die">8</span>
+                </div>
+                <div class="row">
+                  <span class="city">Vĩnh Phúc</span
+                  ><span class="total">3.969</span
+                  ><span class="daynow red">+157</span
+                  ><span class="die">6</span>
+                </div>
+                <div class="row">
+                  <span class="city">Phú Thọ</span
+                  ><span class="total">3.688</span
+                  ><span class="daynow red">+103</span
+                  ><span class="die">3</span>
+                </div>
+                <div class="row">
+                  <span class="city">Thái Bình</span
+                  ><span class="total">3.340</span
+                  ><span class="daynow red">+132</span
+                  ><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hà Nam</span
+                  ><span class="total">3.067</span
+                  ><span class="daynow red">+98</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Thái Nguyên</span
+                  ><span class="total">2.821</span
+                  ><span class="daynow red">+165</span
+                  ><span class="die">1</span>
+                </div>
+                <div class="row">
+                  <span class="city">Quảng Trị</span
+                  ><span class="total">2.665</span
+                  ><span class="daynow red">+160</span
+                  ><span class="die">4</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hòa Bình</span
+                  ><span class="total">2.382</span
+                  ><span class="daynow red">+197</span
+                  ><span class="die">4</span>
+                </div>
+                <div class="row">
+                  <span class="city">Lạng Sơn</span
+                  ><span class="total">1.906</span
+                  ><span class="daynow red">-</span><span class="die">7</span>
+                </div>
+                <div class="row">
+                  <span class="city">Sơn La</span
+                  ><span class="total">1.877</span
+                  ><span class="daynow red">+96</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Hà Tĩnh</span
+                  ><span class="total">1.733</span
+                  ><span class="daynow red">-</span><span class="die">5</span>
+                </div>
+                <div class="row">
+                  <span class="city">Ninh Bình</span
+                  ><span class="total">1.460</span
+                  ><span class="daynow red">-</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Tuyên Quang</span
+                  ><span class="total">1.289</span
+                  ><span class="daynow red">+35</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Kon Tum</span
+                  ><span class="total">1.166</span
+                  ><span class="daynow red">+23</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Yên Bái</span><span class="total">917</span
+                  ><span class="daynow red">+73</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Lào Cai</span><span class="total">894</span
+                  ><span class="daynow red">+27</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Cao Bằng</span
+                  ><span class="total">869</span
+                  ><span class="daynow red">+31</span><span class="die">1</span>
+                </div>
+                <div class="row">
+                  <span class="city">Điện Biên</span
+                  ><span class="total">844</span
+                  ><span class="daynow red">+21</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Bắc Kạn</span><span class="total">416</span
+                  ><span class="daynow red">+53</span><span class="die">0</span>
+                </div>
+                <div class="row">
+                  <span class="city">Lai Châu</span
+                  ><span class="total">234</span
+                  ><span class="daynow red">+32</span><span class="die">0</span>
+                </div>
+              </div>
+              <div class="btn-load btn-load--tinhthanh">
+                <a href="javascript:void(0);" class="xem-them" title="Xem thêm"
+                  >Xem thêm</a
+                ><a
+                  href="javascript:void(0);"
+                  class="rut-gon hidden"
+                  title="Rút gọn"
+                  >Rút gọn</a
+                >
+              </div>
+            </div>
+            <script>
+              (function () {
+                document
+                  .querySelector(".xem-them")
+                  .addEventListener("click", function (e) {
+                    document
+                      .querySelector(".rut-gon")
+                      .classList.remove("hidden");
+                    this.classList.add("hidden");
+                    document.querySelector(".tbody").classList.add("all");
+                  });
+                document
+                  .querySelector(".rut-gon")
+                  .addEventListener("click", function (e) {
+                    document
+                      .querySelector(".xem-them")
+                      .classList.remove("hidden");
+                    this.classList.add("hidden");
+                    document.querySelector(".tbody").classList.remove("all");
+                  });
+              })();
+            </script>
+          </div>
+          <div class="box-juncture">
+            <div class="chart-right" id="chart">
+              <div class="chart-top">
+                <div class="nav-type">
+                  <a href="javascript:void(0);" id="cases" class="item active"
+                    >Số ca nhiễm</a
+                  ><a href="javascript:void(0);" id="recovered" class="item"
+                    >Số ca khỏi</a
+                  ><a href="javascript:void(0);" id="death" class="item"
+                    >Số ca tử vong</a
+                  >
+                </div>
+                <div class="nav-name">
+                  <a href="javascript:void(0);" class="item active">1 tháng</a
+                  ><a
+                    href="javascript:void(0);"
+                    class="item"
+                    style="display: none"
+                    >Toàn thời gian</a
+                  >
+                </div>
+              </div>
+              <div
+                id="container"
+                style="width: 100%; overflow: hidden"
+                data-highcharts-chart="0"
+              >
+                <div
+                  id="highcharts-f1306zx-0"
+                  dir="ltr"
+                  class="highcharts-container"
+                  style="
+                    position: relative;
+                    overflow: hidden;
+                    width: 668px;
+                    height: 400px;
+                    text-align: left;
+                    line-height: normal;
+                    z-index: 0;
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                    user-select: none;
+                    touch-action: manipulation;
+                    outline: none;
+                  "
+                >
+                  <svg
+                    version="1.1"
+                    class="highcharts-root"
+                    style="
+                      font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial,
+                        Helvetica, sans-serif;
+                      font-size: 12px;
+                    "
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="668"
+                    height="400"
+                    viewBox="0 0 668 400"
+                  >
+                    <desc>Created with Highcharts 9.2.2</desc>
+                    <defs>
+                      <clipPath id="highcharts-f1306zx-1-">
+                        <rect
+                          x="0"
+                          y="0"
+                          width="615"
+                          height="318"
+                          fill="none"
+                        ></rect>
+                      </clipPath>
+                    </defs>
+                    <rect
+                      fill="#ffffff"
+                      class="highcharts-background"
+                      x="0"
+                      y="0"
+                      width="668"
+                      height="400"
+                      rx="0"
+                      ry="0"
+                    ></rect>
+                    <rect
+                      fill="none"
+                      class="highcharts-plot-background"
+                      x="43"
+                      y="10"
+                      width="615"
+                      height="318"
+                    ></rect>
+                    <g
+                      class="highcharts-grid highcharts-xaxis-grid"
+                      data-z-index="1"
+                    >
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 130.5 10 L 130.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 218.5 10 L 218.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 306.5 10 L 306.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 393.5 10 L 393.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 481.5 10 L 481.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 569.5 10 L 569.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 657.5 10 L 657.5 328"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 42.5 10 L 42.5 328"
+                        opacity="1"
+                      ></path>
+                    </g>
+                    <g
+                      class="highcharts-grid highcharts-yaxis-grid"
+                      data-z-index="1"
+                    >
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 328.5 L 658 328.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 275.5 L 658 275.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 222.5 L 658 222.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 169.5 L 658 169.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 116.5 L 658 116.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 63.5 L 658 63.5"
+                        opacity="1"
+                      ></path>
+                      <path
+                        fill="none"
+                        stroke="#e6e6e6"
+                        stroke-width="1"
+                        stroke-dasharray="none"
+                        data-z-index="1"
+                        class="highcharts-grid-line"
+                        d="M 43 9.5 L 658 9.5"
+                        opacity="1"
+                      ></path>
+                    </g>
+                    <rect
+                      fill="none"
+                      class="highcharts-plot-border"
+                      data-z-index="1"
+                      x="43"
+                      y="10"
+                      width="615"
+                      height="318"
+                    ></rect>
+                    <g
+                      class="highcharts-axis highcharts-xaxis"
+                      data-z-index="2"
+                    >
+                      <path
+                        fill="none"
+                        class="highcharts-axis-line"
+                        stroke="#ccd6eb"
+                        stroke-width="1"
+                        data-z-index="7"
+                        d="M 43 328.5 L 658 328.5"
+                      ></path>
+                    </g>
+                    <g
+                      class="highcharts-axis highcharts-yaxis"
+                      data-z-index="2"
+                    >
+                      <path
+                        fill="none"
+                        class="highcharts-axis-line"
+                        data-z-index="7"
+                        d="M 43 10 L 43 328"
+                      ></path>
+                    </g>
+                    <path
+                      fill="none"
+                      class="highcharts-crosshair highcharts-crosshair-category"
+                      data-z-index="2"
+                      stroke="rgba(204,214,235,0.25)"
+                      stroke-width="87.85714285714286"
+                      style="pointer-events: none"
+                      visibility="hidden"
+                      d="M 613.5 10 L 613.5 328"
+                    ></path>
+                    <g class="highcharts-series-group" data-z-index="3">
+                      <g
+                        class="highcharts-series highcharts-series-0 highcharts-column-series highcharts-tracker"
+                        data-z-index="0.1"
+                        opacity="1"
+                        transform="translate(43,10) scale(1 1)"
+                        clip-path="url(#highcharts-f1306zx-1-)"
+                      >
+                        <rect
+                          x="22.5"
+                          y="161.5"
+                          width="43"
+                          height="157"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="110.5"
+                          y="138.5"
+                          width="43"
+                          height="180"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="198.5"
+                          y="149.5"
+                          width="43"
+                          height="169"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="285.5"
+                          y="88.5"
+                          width="43"
+                          height="230"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="373.5"
+                          y="138.5"
+                          width="43"
+                          height="180"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="461.5"
+                          y="44.5"
+                          width="43"
+                          height="274"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                        <rect
+                          x="549.5"
+                          y="145.5"
+                          width="43"
+                          height="173"
+                          fill="gray"
+                          stroke="#ffffff"
+                          stroke-width="1"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></rect>
+                      </g>
+                      <g
+                        class="highcharts-markers highcharts-series-0 highcharts-column-series"
+                        data-z-index="0.1"
+                        opacity="1"
+                        transform="translate(43,10) scale(1 1)"
+                        clip-path="none"
+                      ></g>
+                      <g
+                        class="highcharts-series highcharts-series-1 highcharts-spline-series"
+                        data-z-index="0.1"
+                        opacity="1"
+                        transform="translate(43,10) scale(1 1)"
+                        clip-path="url(#highcharts-f1306zx-1-)"
+                      >
+                        <path
+                          fill="none"
+                          d="M 43.928571428571 123.2886 C 43.928571428571 123.2886 96.64285714285438 123.2886 131.78571428571 123.2886 C 166.92857142857 123.2886 184.5 123.2886 219.64285714286 123.2886 C 254.78571428571598 123.2886 272.357142857144 123.2886 307.5 123.2886 C 342.642857142856 123.2886 360.214285714284 123.2886 395.35714285714 123.2886 C 430.5 123.2886 448.07142857143 123.2886 483.21428571429 123.2886 C 518.3571428571461 123.2886 571.07142857143 123.2886 571.07142857143 123.2886"
+                          class="highcharts-graph"
+                          data-z-index="1"
+                          stroke="red"
+                          stroke-width="2"
+                          stroke-linejoin="round"
+                          stroke-linecap="round"
+                        ></path>
+                        <path
+                          fill="none"
+                          d="M 43.928571428571 123.2886 C 43.928571428571 123.2886 96.64285714285438 123.2886 131.78571428571 123.2886 C 166.92857142857 123.2886 184.5 123.2886 219.64285714286 123.2886 C 254.78571428571598 123.2886 272.357142857144 123.2886 307.5 123.2886 C 342.642857142856 123.2886 360.214285714284 123.2886 395.35714285714 123.2886 C 430.5 123.2886 448.07142857143 123.2886 483.21428571429 123.2886 C 518.3571428571461 123.2886 571.07142857143 123.2886 571.07142857143 123.2886"
+                          visibility="visible"
+                          data-z-index="2"
+                          class="highcharts-tracker-line"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke="rgba(192,192,192,0.0001)"
+                          stroke-width="22"
+                        ></path>
+                      </g>
+                      <g
+                        class="highcharts-markers highcharts-series-1 highcharts-spline-series highcharts-tracker"
+                        data-z-index="0.1"
+                        opacity="1"
+                        transform="translate(43,10) scale(1 1)"
+                      >
+                        <path
+                          fill="red"
+                          d="M 571 123.2886 A 0 0 0 1 1 571 123.2886 Z"
+                          class="highcharts-halo highcharts-color-undefined"
+                          data-z-index="-1"
+                          fill-opacity="0.25"
+                          visibility="hidden"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 43 127.2886 A 4 4 0 1 1 43.00399999933334 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 131 127.2886 A 4 4 0 1 1 131.00399999933333 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 219 127.2886 A 4 4 0 1 1 219.00399999933333 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                          stroke-width="0.00046655497961811676"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 307 127.2886 A 4 4 0 1 1 307.00399999933336 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                          stroke-width="0.00029593406077155215"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 395 127.2886 A 4 4 0 1 1 395.00399999933336 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                          stroke-width="0.0006315216969912107"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 483 127.2886 A 4 4 0 1 1 483.00399999933336 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                          stroke-width="0.0000499781924347964"
+                        ></path>
+                        <path
+                          fill="red"
+                          d="M 571 127.2886 A 4 4 0 1 1 571.0039999993334 127.28859800000016 Z"
+                          opacity="1"
+                          class="highcharts-point"
+                          stroke-width="0.000006459718692730654"
+                        ></path>
+                      </g>
+                    </g>
+                    <text
+                      x="334"
+                      text-anchor="middle"
+                      class="highcharts-title"
+                      data-z-index="4"
+                      style="color: #333333; font-size: 18px; fill: #333333"
+                      y="24"
+                    ></text>
+                    <text
+                      x="334"
+                      text-anchor="middle"
+                      class="highcharts-subtitle"
+                      data-z-index="4"
+                      style="color: #666666; fill: #666666"
+                      y="24"
+                    ></text>
+                    <text
+                      x="10"
+                      text-anchor="start"
+                      class="highcharts-caption"
+                      data-z-index="4"
+                      style="color: #666666; fill: #666666"
+                      y="397"
+                    ></text>
+                    <g
+                      class="highcharts-legend highcharts-no-tooltip"
+                      data-z-index="7"
+                      transform="translate(202,360)"
+                    >
+                      <rect
+                        fill="none"
+                        class="highcharts-legend-box"
+                        rx="0"
+                        ry="0"
+                        x="0"
+                        y="0"
+                        width="263"
+                        height="25"
+                        visibility="visible"
+                      ></rect>
+                      <g data-z-index="1">
+                        <g>
+                          <g
+                            class="highcharts-legend-item highcharts-column-series highcharts-color-undefined highcharts-series-0"
+                            data-z-index="1"
+                            transform="translate(8,3)"
+                          >
+                            <text
+                              x="21"
+                              style="
+                                color: #333333;
+                                cursor: pointer;
+                                font-size: 12px;
+                                font-weight: bold;
+                                fill: #333333;
+                              "
+                              text-anchor="start"
+                              data-z-index="2"
+                              y="15"
+                            >
+                              SỐ CA NHIỄM
+                            </text>
+                            <rect
+                              x="2"
+                              y="4"
+                              width="12"
+                              height="12"
+                              fill="gray"
+                              rx="6"
+                              ry="6"
+                              class="highcharts-point"
+                              data-z-index="3"
+                            ></rect>
+                          </g>
+                          <g
+                            class="highcharts-legend-item highcharts-spline-series highcharts-color-undefined highcharts-series-1"
+                            data-z-index="1"
+                            transform="translate(128.5625,3)"
+                          >
+                            <path
+                              fill="none"
+                              d="M 0 11 L 16 11"
+                              class="highcharts-graph"
+                              stroke="red"
+                              stroke-width="2"
+                            ></path>
+                            <path
+                              fill="red"
+                              d="M 8 15 A 4 4 0 1 1 8.003999999333336 14.999998000000167 Z"
+                              class="highcharts-point"
+                              opacity="1"
+                            ></path>
+                            <text
+                              x="21"
+                              y="15"
+                              style="
+                                color: #333333;
+                                cursor: pointer;
+                                font-size: 12px;
+                                font-weight: bold;
+                                fill: #333333;
+                              "
+                              text-anchor="start"
+                              data-z-index="2"
+                            >
+                              Trung Bình 7 Ngày
+                            </text>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                    <g
+                      class="highcharts-axis-labels highcharts-xaxis-labels"
+                      data-z-index="7"
+                    >
+                      <text
+                        x="86.92857142856856"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        01-01
+                      </text>
+                      <text
+                        x="174.7857142857186"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        02-01
+                      </text>
+                      <text
+                        x="262.64285714285853"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        03-01
+                      </text>
+                      <text
+                        x="350.4999999999986"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        04-01
+                      </text>
+                      <text
+                        x="438.35714285713857"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        05-01
+                      </text>
+                      <text
+                        x="526.2142857142885"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        06-01
+                      </text>
+                      <text
+                        x="614.0714285714286"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="middle"
+                        transform="translate(0,0)"
+                        y="347"
+                        opacity="1"
+                      >
+                        07-01
+                      </text>
+                    </g>
+                    <g
+                      class="highcharts-axis-labels highcharts-yaxis-labels"
+                      data-z-index="7"
+                    >
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="333"
+                        opacity="1"
+                      >
+                        0
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="280"
+                        opacity="1"
+                      >
+                        5k
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="227"
+                        opacity="1"
+                      >
+                        10k
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="174"
+                        opacity="1"
+                      >
+                        15k
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="121"
+                        opacity="1"
+                      >
+                        20k
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="68"
+                        opacity="1"
+                      >
+                        25k
+                      </text>
+                      <text
+                        x="28"
+                        style="
+                          color: #666666;
+                          cursor: default;
+                          font-size: 11px;
+                          fill: #666666;
+                        "
+                        text-anchor="end"
+                        transform="translate(0,0)"
+                        y="15"
+                        opacity="1"
+                      >
+                        30k
+                      </text>
+                    </g>
+                    <g
+                      class="highcharts-label highcharts-tooltip highcharts-color-undefined"
+                      style="
+                        cursor: default;
+                        white-space: nowrap;
+                        pointer-events: none;
+                      "
+                      data-z-index="8"
+                      transform="translate(438,-9999)"
+                      opacity="0"
+                      visibility="hidden"
+                    >
+                      <path
+                        fill="none"
+                        class="highcharts-label-box highcharts-tooltip-box highcharts-shadow"
+                        d="M 3.5 0.5 L 167.5 0.5 C 170.5 0.5 170.5 0.5 170.5 3.5 L 170.5 55.5 C 170.5 58.5 170.5 58.5 167.5 58.5 L 3.5 58.5 C 0.5 58.5 0.5 58.5 0.5 55.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                        stroke="#000000"
+                        stroke-opacity="0.049999999999999996"
+                        stroke-width="5"
+                        transform="translate(1, 1)"
+                      ></path>
+                      <path
+                        fill="none"
+                        class="highcharts-label-box highcharts-tooltip-box highcharts-shadow"
+                        d="M 3.5 0.5 L 167.5 0.5 C 170.5 0.5 170.5 0.5 170.5 3.5 L 170.5 55.5 C 170.5 58.5 170.5 58.5 167.5 58.5 L 3.5 58.5 C 0.5 58.5 0.5 58.5 0.5 55.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                        stroke="#000000"
+                        stroke-opacity="0.09999999999999999"
+                        stroke-width="3"
+                        transform="translate(1, 1)"
+                      ></path>
+                      <path
+                        fill="none"
+                        class="highcharts-label-box highcharts-tooltip-box highcharts-shadow"
+                        d="M 3.5 0.5 L 167.5 0.5 C 170.5 0.5 170.5 0.5 170.5 3.5 L 170.5 55.5 C 170.5 58.5 170.5 58.5 167.5 58.5 L 3.5 58.5 C 0.5 58.5 0.5 58.5 0.5 55.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                        stroke="#000000"
+                        stroke-opacity="0.15"
+                        stroke-width="1"
+                        transform="translate(1, 1)"
+                      ></path>
+                      <path
+                        fill="rgba(247,247,247,0.85)"
+                        class="highcharts-label-box highcharts-tooltip-box"
+                        d="M 3.5 0.5 L 167.5 0.5 C 170.5 0.5 170.5 0.5 170.5 3.5 L 170.5 55.5 C 170.5 58.5 170.5 58.5 167.5 58.5 L 3.5 58.5 C 0.5 58.5 0.5 58.5 0.5 55.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                        stroke="gray"
+                        stroke-width="1"
+                      ></path>
+                      <text
+                        x="8"
+                        data-z-index="1"
+                        y="18"
+                        style="color: #333333; font-size: 12px; fill: #333333"
+                      >
+                        <tspan style="font-size: 10px">07-01</tspan>
+                        <tspan class="highcharts-br" dy="15" x="8">
+                          &ZeroWidthSpace;
+                        </tspan>
+                        <tspan style="fill: gray">●</tspan>
+                        SỐ CA NHIỄM:
+                        <tspan style="font-weight: bold">16 278</tspan>
+                        <tspan class="highcharts-br" dy="15" x="8">
+                          &ZeroWidthSpace;
+                        </tspan>
+                        <tspan style="fill: red">●</tspan>
+                        Trung Bình 7 Ngày:
+                        <tspan style="font-weight: bold">18 369</tspan>
+                        <tspan class="highcharts-br">&ZeroWidthSpace;</tspan>
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <script>
+              function s(t) {
+                var e = l;
+                function a(t) {
+                  return void 0 !== window.Intl
+                    ? new Intl.NumberFormat("en-DE").format(t)
+                    : t;
+                }
+                return {
+                  template: function (e) {
+                    var i = e.total;
+                    for (var n in i) {
+                      var o = "";
+                      for (var r in i[n])
+                        o += '<div class="item"><p class="text">'
+                          .concat(t[r], '</p><p class="value">')
+                          .concat(
+                            a(i[n][r]),
+                            '</p><p class="note">Hôm nay<span>'
+                          )
+                          .concat(
+                            e.today[n][r] > 0 ? " +" + a(e.today[n][r]) : " 0",
+                            "</span></p></div>"
+                          );
+                      var c = "en",
+                        l = "";
+                      "internal" == n && ((c = "vi"), (l = "show")),
+                        (o = '<div class="content-tab '
+                          .concat(l, '" id="')
+                          .concat(c, '"><div class="home__statistical-list">')
+                          .concat(o, "</div></div>"));
+                    }
+                    return '<div class="chart-top"><div class="nav-type"><a href="javascript:void(0);" id="cases" class="item active">Số ca nhiễm</a><a href="javascript:void(0);" id="recovered" class="item">Số ca khỏi</a><a href="javascript:void(0);" id="death" class="item">Số ca tử vong</a></div><div class="nav-name"><a href="javascript:void(0);" class="item active">1 tháng</a><a href="javascript:void(0);" class="item" style="display:none;">Toàn thời gian</a></div></div><div id="container" style="width:100%;"></div>';
+                  },
+                  drawChartOne: function (e, a) {
+                    var i = "",
+                      n = [];
+                    switch (e) {
+                      case "death":
+                        (i = t.avgDeath7day), (n = a.avgDeath7day);
+                        break;
+                      case "recovered":
+                        (i = t.avgRecovered7day), (n = a.avgRecovered7day);
+                        break;
+                      case "cases":
+                        (i = t.avgCases7day), (n = a.avgCases7day);
+                    }
+                    Highcharts.chart("container", {
+                      chart: { zoomType: "xy" },
+                      exporting: { enabled: !1 },
+                      credits: { enabled: !1 },
+                      title: { text: "" },
+                      yAxis: { title: !1 },
+                      xAxis: [{ categories: a.dates, crosshair: !0 }],
+                      tooltip: { shared: !0 },
+                      series: [
+                        {
+                          name: t[e],
+                          type: "column",
+                          color: "gray",
+                          data: a[e],
+                          tooltip: { valueSuffix: "" },
+                        },
+                        {
+                          name: i,
+                          type: "spline",
+                          data: n,
+                          color: "red",
+                          tooltip: { valueSuffix: "" },
+                        },
+                      ],
+                    });
+                  },
+                  drawChart: function (e) {
+                    Highcharts.chart("container", {
+                      chart: { zoomType: "xy" },
+                      exporting: { enabled: !1 },
+                      credits: { enabled: !1 },
+                      title: { text: "" },
+                      yAxis: { title: !1 },
+                      xAxis: [{ categories: e.dates, crosshair: !0 }],
+                      tooltip: { shared: !0 },
+                      series: [
+                        {
+                          name: t.cases,
+                          type: "column",
+                          color: "gray",
+                          data: e.cases,
+                          tooltip: { valueSuffix: "" },
+                        },
+                        {
+                          name: t.avgCases7day,
+                          type: "spline",
+                          data: e.avgCases7day,
+                          color: "red",
+                          tooltip: { valueSuffix: "" },
+                        },
+                      ],
+                    });
+                  },
+                  render: function (t, a, i) {
+                    var n = this;
+                    (i = i || document).getElementById(t).innerHTML =
+                      this.template(a);
+                    var o = {
+                      dates: [],
+                      death: [],
+                      cases: [],
+                      recovered: [],
+                      avgCases7day: [],
+                      avgDeath7day: [],
+                      avgRecovered7day: [],
+                    };
+                    a.overview.forEach(function (t, e) {
+                      o.dates.push(t.date),
+                        o.death.push(t.death),
+                        o.cases.push(t.cases),
+                        o.recovered.push(t.recovered),
+                        o.avgCases7day.push(t.avgCases7day),
+                        o.avgRecovered7day.push(t.avgRecovered7day),
+                        o.avgDeath7day.push(t.avgDeath7day);
+                    }),
+                      e(
+                        "https://static.pipezero.com/covid-sumary/highcharts.js",
+                        function () {
+                          n.drawChart(o),
+                            i
+                              .getElementById("cases")
+                              .addEventListener("click", function (t) {
+                                i.querySelector(
+                                  ".nav-type .active"
+                                ).classList.remove("active");
+                                var e = i.getElementById("cases");
+                                -1 == e.className.indexOf("active") &&
+                                  e.classList.add("active"),
+                                  n.drawChartOne(e.id, o);
+                              }),
+                            i
+                              .getElementById("recovered")
+                              .addEventListener("click", function () {
+                                i.querySelector(
+                                  ".nav-type .active"
+                                ).classList.remove("active");
+                                var t = i.getElementById("recovered");
+                                -1 == t.className.indexOf("active") &&
+                                  t.classList.add("active"),
+                                  n.drawChartOne(t.id, o);
+                              }),
+                            i
+                              .getElementById("death")
+                              .addEventListener("click", function () {
+                                i.querySelector(
+                                  ".nav-type .active"
+                                ).classList.remove("active");
+                                var t = i.getElementById("death");
+                                -1 == t.className.indexOf("active") &&
+                                  t.classList.add("active"),
+                                  n.drawChartOne(t.id, o);
+                              });
+                        }
+                      ),
+                      (frameElement.style.height =
+                        document.body.clientHeight + "px");
+                    var r = 0;
+                    !(function t() {
+                      var e = 2e3;
+                      r <= 3 && (r++, (e = 2e3)),
+                        (frameElement.style.height =
+                          document.body.clientHeight + "px"),
+                        window.setTimeout(function () {
+                          t();
+                        }, e);
+                    })();
+                  },
+                };
+              }
+              new s({
+                death: "TỬ VONG",
+                treating: "ĐANG ĐIỀU TRỊ",
+                cases: "SỐ CA NHIỄM",
+                recovered: "KHỎI",
+                casesToday: "HÔM NAY",
+                avgCases7day: "Trung Bình 7 Ngày",
+                avgRecovered7day: "Trung bình 7 ngày",
+                avgDeath7day: "Trung bình 7 ngày",
+              }).render("chart", {
+                total: {
+                  internal: {
+                    death: 33877,
+                    treating: 6006,
+                    cases: 1859841,
+                    recovered: 1479048,
+                  },
+                  world: {
+                    death: 5491594,
+                    treating: 37820873,
+                    cases: 300972234,
+                    recovered: 257659767,
+                  },
+                },
+                today: {
+                  internal: {
+                    death: 233,
+                    treating: -620,
+                    cases: 16278,
+                    recovered: 14633,
+                  },
+                  world: {
+                    death: 7347,
+                    treating: 1826481,
+                    cases: 2568690,
+                    recovered: 734862,
+                  },
+                },
+                overview: [
+                  {
+                    date: "01-01",
+                    death: 216,
+                    treating: -987,
+                    cases: 14835,
+                    recovered: 2990,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "02-01",
+                    death: 221,
+                    treating: 442,
+                    cases: 16948,
+                    recovered: 14420,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "03-01",
+                    death: 190,
+                    treating: -319,
+                    cases: 15936,
+                    recovered: 24461,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "04-01",
+                    death: 224,
+                    treating: 224,
+                    cases: 21728,
+                    recovered: 16227,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "05-01",
+                    death: 230,
+                    treating: -394,
+                    cases: 17017,
+                    recovered: 22662,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "06-01",
+                    death: 169,
+                    treating: 369,
+                    cases: 25842,
+                    recovered: 28369,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                  {
+                    date: "07-01",
+                    death: 233,
+                    treating: -620,
+                    cases: 16278,
+                    recovered: 14633,
+                    avgCases7day: 18369,
+                    avgRecovered7day: 17680,
+                    avgDeath7day: 212,
+                  },
+                ],
+                locations: [
+                  {
+                    name: "TP. Hồ Chí Minh",
+                    death: 19693,
+                    treating: 0,
+                    cases: 508255,
+                    recovered: 0,
+                    casesToday: 489,
+                  },
+                  {
+                    name: "Bình Dương",
+                    death: 3326,
+                    treating: 0,
+                    cases: 291381,
+                    recovered: 0,
+                    casesToday: 52,
+                  },
+                  {
+                    name: "Đồng Nai",
+                    death: 1514,
+                    treating: 0,
+                    cases: 98583,
+                    recovered: 0,
+                    casesToday: 127,
+                  },
+                  {
+                    name: "Tây Ninh",
+                    death: 742,
+                    treating: 0,
+                    cases: 81886,
+                    recovered: 0,
+                    casesToday: 583,
+                  },
+                  {
+                    name: "Hà Nội",
+                    death: 170,
+                    treating: 0,
+                    cases: 62536,
+                    recovered: 0,
+                    casesToday: 2723,
+                  },
+                  {
+                    name: "Vĩnh Long",
+                    death: 455,
+                    treating: 0,
+                    cases: 47158,
+                    recovered: 0,
+                    casesToday: 699,
+                  },
+                  {
+                    name: "Đồng Tháp",
+                    death: 663,
+                    treating: 0,
+                    cases: 45445,
+                    recovered: 0,
+                    casesToday: 135,
+                  },
+                  {
+                    name: "Cần Thơ",
+                    death: 683,
+                    treating: 0,
+                    cases: 42365,
+                    recovered: 0,
+                    casesToday: 213,
+                  },
+                  {
+                    name: "Cà Mau",
+                    death: 209,
+                    treating: 0,
+                    cases: 42110,
+                    recovered: 0,
+                    casesToday: 676,
+                  },
+                  {
+                    name: "Long An",
+                    death: 946,
+                    treating: 0,
+                    cases: 40737,
+                    recovered: 0,
+                    casesToday: 32,
+                  },
+                  {
+                    name: "Khánh Hòa",
+                    death: 197,
+                    treating: 0,
+                    cases: 38730,
+                    recovered: 0,
+                    casesToday: 790,
+                  },
+                  {
+                    name: "Tiền Giang",
+                    death: 1031,
+                    treating: 0,
+                    cases: 34504,
+                    recovered: 0,
+                    casesToday: 97,
+                  },
+                  {
+                    name: "An Giang",
+                    death: 1095,
+                    treating: 0,
+                    cases: 34081,
+                    recovered: 0,
+                    casesToday: 188,
+                  },
+                  {
+                    name: "Bạc Liêu",
+                    death: 293,
+                    treating: 0,
+                    cases: 32126,
+                    recovered: 0,
+                    casesToday: 210,
+                  },
+                  {
+                    name: "Trà Vinh",
+                    death: 155,
+                    treating: 0,
+                    cases: 31637,
+                    recovered: 0,
+                    casesToday: 498,
+                  },
+                  {
+                    name: "Kiên Giang",
+                    death: 596,
+                    treating: 0,
+                    cases: 31118,
+                    recovered: 0,
+                    casesToday: 229,
+                  },
+                  {
+                    name: "Sóc Trăng",
+                    death: 394,
+                    treating: 0,
+                    cases: 30972,
+                    recovered: 0,
+                    casesToday: 91,
+                  },
+                  {
+                    name: "Bến Tre",
+                    death: 235,
+                    treating: 0,
+                    cases: 28232,
+                    recovered: 0,
+                    casesToday: 443,
+                  },
+                  {
+                    name: "Bà Rịa – Vũng Tàu",
+                    death: 240,
+                    treating: 0,
+                    cases: 27330,
+                    recovered: 0,
+                    casesToday: 263,
+                  },
+                  {
+                    name: "Bình Phước",
+                    death: 87,
+                    treating: 0,
+                    cases: 26989,
+                    recovered: 0,
+                    casesToday: 716,
+                  },
+                  {
+                    name: "Bình Thuận",
+                    death: 318,
+                    treating: 0,
+                    cases: 26961,
+                    recovered: 0,
+                    casesToday: 121,
+                  },
+                  {
+                    name: "Bình Định",
+                    death: 67,
+                    treating: 0,
+                    cases: 20232,
+                    recovered: 0,
+                    casesToday: 667,
+                  },
+                  {
+                    name: "Hải Phòng",
+                    death: 10,
+                    treating: 0,
+                    cases: 15612,
+                    recovered: 0,
+                    casesToday: 795,
+                  },
+                  {
+                    name: "Thừa Thiên Huế",
+                    death: 79,
+                    treating: 0,
+                    cases: 15395,
+                    recovered: 0,
+                    casesToday: 235,
+                  },
+                  {
+                    name: "Bắc Ninh",
+                    death: 18,
+                    treating: 0,
+                    cases: 14135,
+                    recovered: 0,
+                    casesToday: 351,
+                  },
+                  {
+                    name: "Đà Nẵng",
+                    death: 112,
+                    treating: 0,
+                    cases: 13353,
+                    recovered: 0,
+                    casesToday: 309,
+                  },
+                  {
+                    name: "Hậu Giang",
+                    death: 82,
+                    treating: 0,
+                    cases: 12969,
+                    recovered: 0,
+                    casesToday: 148,
+                  },
+                  {
+                    name: "Đắk Lắk",
+                    death: 68,
+                    treating: 0,
+                    cases: 12297,
+                    recovered: 0,
+                    casesToday: 0,
+                  },
+                  {
+                    name: "Lâm Đồng",
+                    death: 30,
+                    treating: 0,
+                    cases: 10883,
+                    recovered: 0,
+                    casesToday: 245,
+                  },
+                  {
+                    name: "Thanh Hóa",
+                    death: 13,
+                    treating: 0,
+                    cases: 9622,
+                    recovered: 0,
+                    casesToday: 275,
+                  },
+                  {
+                    name: "Bắc Giang",
+                    death: 14,
+                    treating: 0,
+                    cases: 8906,
+                    recovered: 0,
+                    casesToday: 162,
+                  },
+                  {
+                    name: "Nghệ An",
+                    death: 36,
+                    treating: 0,
+                    cases: 8757,
+                    recovered: 0,
+                    casesToday: 131,
+                  },
+                  {
+                    name: "Hà Giang",
+                    death: 7,
+                    treating: 0,
+                    cases: 8753,
+                    recovered: 0,
+                    casesToday: 263,
+                  },
+                  {
+                    name: "Phú Yên",
+                    death: 55,
+                    treating: 0,
+                    cases: 8053,
+                    recovered: 0,
+                    casesToday: 56,
+                  },
+                  {
+                    name: "Gia Lai",
+                    death: 21,
+                    treating: 0,
+                    cases: 8036,
+                    recovered: 0,
+                    casesToday: 2,
+                  },
+                  {
+                    name: "Quảng Nam",
+                    death: 21,
+                    treating: 0,
+                    cases: 7556,
+                    recovered: 0,
+                    casesToday: 173,
+                  },
+                  {
+                    name: "Hưng Yên",
+                    death: 2,
+                    treating: 0,
+                    cases: 7300,
+                    recovered: 0,
+                    casesToday: 319,
+                  },
+                  {
+                    name: "Quảng Ngãi",
+                    death: 29,
+                    treating: 0,
+                    cases: 6968,
+                    recovered: 0,
+                    casesToday: 186,
+                  },
+                  {
+                    name: "Ninh Thuận",
+                    death: 54,
+                    treating: 0,
+                    cases: 6029,
+                    recovered: 0,
+                    casesToday: 39,
+                  },
+                  {
+                    name: "Đắk Nông",
+                    death: 14,
+                    treating: 0,
+                    cases: 5751,
+                    recovered: 0,
+                    casesToday: 106,
+                  },
+                  {
+                    name: "Quảng Ninh",
+                    death: 1,
+                    treating: 0,
+                    cases: 5294,
+                    recovered: 0,
+                    casesToday: 345,
+                  },
+                  {
+                    name: "Hải Dương",
+                    death: 2,
+                    treating: 0,
+                    cases: 5122,
+                    recovered: 0,
+                    casesToday: 443,
+                  },
+                  {
+                    name: "Nam Định",
+                    death: 4,
+                    treating: 0,
+                    cases: 4188,
+                    recovered: 0,
+                    casesToday: 172,
+                  },
+                  {
+                    name: "Quảng Bình",
+                    death: 8,
+                    treating: 0,
+                    cases: 3995,
+                    recovered: 0,
+                    casesToday: 54,
+                  },
+                  {
+                    name: "Vĩnh Phúc",
+                    death: 6,
+                    treating: 0,
+                    cases: 3969,
+                    recovered: 0,
+                    casesToday: 157,
+                  },
+                  {
+                    name: "Phú Thọ",
+                    death: 3,
+                    treating: 0,
+                    cases: 3688,
+                    recovered: 0,
+                    casesToday: 103,
+                  },
+                  {
+                    name: "Thái Bình",
+                    death: 0,
+                    treating: 0,
+                    cases: 3340,
+                    recovered: 0,
+                    casesToday: 132,
+                  },
+                  {
+                    name: "Hà Nam",
+                    death: 0,
+                    treating: 0,
+                    cases: 3067,
+                    recovered: 0,
+                    casesToday: 98,
+                  },
+                  {
+                    name: "Thái Nguyên",
+                    death: 1,
+                    treating: 0,
+                    cases: 2821,
+                    recovered: 0,
+                    casesToday: 165,
+                  },
+                  {
+                    name: "Quảng Trị",
+                    death: 4,
+                    treating: 0,
+                    cases: 2665,
+                    recovered: 0,
+                    casesToday: 160,
+                  },
+                  {
+                    name: "Hòa Bình",
+                    death: 4,
+                    treating: 0,
+                    cases: 2382,
+                    recovered: 0,
+                    casesToday: 197,
+                  },
+                  {
+                    name: "Lạng Sơn",
+                    death: 7,
+                    treating: 0,
+                    cases: 1906,
+                    recovered: 0,
+                    casesToday: 0,
+                  },
+                  {
+                    name: "Sơn La",
+                    death: 0,
+                    treating: 0,
+                    cases: 1877,
+                    recovered: 0,
+                    casesToday: 96,
+                  },
+                  {
+                    name: "Hà Tĩnh",
+                    death: 5,
+                    treating: 0,
+                    cases: 1733,
+                    recovered: 0,
+                    casesToday: 0,
+                  },
+                  {
+                    name: "Ninh Bình",
+                    death: 0,
+                    treating: 0,
+                    cases: 1460,
+                    recovered: 0,
+                    casesToday: 0,
+                  },
+                  {
+                    name: "Tuyên Quang",
+                    death: 0,
+                    treating: 0,
+                    cases: 1289,
+                    recovered: 0,
+                    casesToday: 35,
+                  },
+                  {
+                    name: "Kon Tum",
+                    death: 0,
+                    treating: 0,
+                    cases: 1166,
+                    recovered: 0,
+                    casesToday: 23,
+                  },
+                  {
+                    name: "Yên Bái",
+                    death: 0,
+                    treating: 0,
+                    cases: 917,
+                    recovered: 0,
+                    casesToday: 73,
+                  },
+                  {
+                    name: "Lào Cai",
+                    death: 0,
+                    treating: 0,
+                    cases: 894,
+                    recovered: 0,
+                    casesToday: 27,
+                  },
+                  {
+                    name: "Cao Bằng",
+                    death: 1,
+                    treating: 0,
+                    cases: 869,
+                    recovered: 0,
+                    casesToday: 31,
+                  },
+                  {
+                    name: "Điện Biên",
+                    death: 0,
+                    treating: 0,
+                    cases: 844,
+                    recovered: 0,
+                    casesToday: 21,
+                  },
+                  {
+                    name: "Bắc Kạn",
+                    death: 0,
+                    treating: 0,
+                    cases: 416,
+                    recovered: 0,
+                    casesToday: 53,
+                  },
+                  {
+                    name: "Lai Châu",
+                    death: 0,
+                    treating: 0,
+                    cases: 234,
+                    recovered: 0,
+                    casesToday: 32,
+                  },
+                ],
+              });
+            </script>
+          </div>
+        </div>
+      </body>
+    </div>
+
+    -->
+  </body>
+</html>
